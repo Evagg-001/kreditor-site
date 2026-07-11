@@ -1,0 +1,4 @@
+KREDITOR V5 QA REPORT
+HTML files: 15
+Broken local links/assets: 0
+All local links and assets resolve correctly.

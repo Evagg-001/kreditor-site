@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://kreditor.pro/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kreditor.pro/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/practices.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/practice-debt.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/practice-debtor.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/practice-business.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/practice-leasing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/academy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/partners.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/faq.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/contacts.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/legal/privacy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/legal/terms.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kreditor.pro/legal/cookies.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

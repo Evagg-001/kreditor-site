@@ -1,16 +1,22 @@
-ГОТОВАЯ PRODUCTION-ВЕРСИЯ KREDITOR.PRO
+КОНКРЕТНЫЕ ДЕЙСТВИЯ ПО ЗАГРУЗКЕ
 
-1. Сначала сохраните резервную копию текущего репозитория.
-2. Распакуйте этот архив.
-3. Скопируйте ВСЕ файлы из папки kreditor-ecosystem-v4-production в локальную папку репозитория kreditor-site.
-4. При запросе Finder выберите «Заменить».
-5. В VS Code откройте Terminal и выполните:
-
+1. Сделайте резервную копию текущей папки kreditor-site.
+2. Распакуйте архив kreditor-site-final-v5.zip.
+3. Откройте локальную папку kreditor-site, связанную с GitHub.
+4. Удалите старые видимые файлы из kreditor-site. Скрытую папку .git НЕ удаляйте.
+5. Скопируйте внутрь kreditor-site всё содержимое папки kreditor-site-final-v5.
+6. Откройте kreditor-site в VS Code.
+7. Terminal → New Terminal.
+8. Выполните по очереди:
    git add .
-   git commit -m "Публикация KREDITOR Ecosystem V4"
+   git commit -m "KREDITOR V5 final site"
+   git pull origin main --rebase
    git push origin main
+9. Откройте GitHub → Actions и дождитесь зелёной галочки.
+10. Откройте https://kreditor.pro в приватном окне Safari.
+11. Проверьте главную, все пункты меню, формы и мобильную версию.
 
-6. Откройте GitHub → Actions и дождитесь зелёной галочки.
-7. Проверьте https://kreditor.pro в приватном окне Safari.
-
-ВАЖНО: папку assets не удалять; изображение assets/hero.jpg.png обязательно для главного экрана.
+ОТКАТ:
+git log --oneline
+git revert <номер_предыдущего_коммита>
+git push origin main
