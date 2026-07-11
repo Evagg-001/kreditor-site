@@ -1,0 +1,8 @@
+ЗАГРУЗКА НА REG.RU
+1. Откройте /www/kreditor.pro/
+2. Удалите старые файлы.
+3. Загрузите kreditor-pro-final.zip.
+4. Выберите архив и нажмите «Распаковать» в текущую папку.
+5. В /www/kreditor.pro/ должны лежать index.html, about.html, contacts.html, папки practices и legal.
+6. Откройте https://kreditor.pro и нажмите Cmd+Shift+R.
+ВАЖНО: все HTML-файлы самодостаточны — стили и скрипты встроены внутрь.
