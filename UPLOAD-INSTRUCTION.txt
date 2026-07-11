@@ -1,8 +1,16 @@
-ЗАГРУЗКА НА REG.RU
-1. Откройте /www/kreditor.pro/
-2. Удалите старые файлы.
-3. Загрузите kreditor-pro-final.zip.
-4. Выберите архив и нажмите «Распаковать» в текущую папку.
-5. В /www/kreditor.pro/ должны лежать index.html, about.html, contacts.html, папки practices и legal.
-6. Откройте https://kreditor.pro и нажмите Cmd+Shift+R.
-ВАЖНО: все HTML-файлы самодостаточны — стили и скрипты встроены внутрь.
+ГОТОВАЯ PRODUCTION-ВЕРСИЯ KREDITOR.PRO
+
+1. Сначала сохраните резервную копию текущего репозитория.
+2. Распакуйте этот архив.
+3. Скопируйте ВСЕ файлы из папки kreditor-ecosystem-v4-production в локальную папку репозитория kreditor-site.
+4. При запросе Finder выберите «Заменить».
+5. В VS Code откройте Terminal и выполните:
+
+   git add .
+   git commit -m "Публикация KREDITOR Ecosystem V4"
+   git push origin main
+
+6. Откройте GitHub → Actions и дождитесь зелёной галочки.
+7. Проверьте https://kreditor.pro в приватном окне Safari.
+
+ВАЖНО: папку assets не удалять; изображение assets/hero.jpg.png обязательно для главного экрана.

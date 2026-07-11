@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://kreditor.pro/</loc></url>
-<url><loc>https://kreditor.pro/about.html</loc></url>
-<url><loc>https://kreditor.pro/practices.html</loc></url>
-<url><loc>https://kreditor.pro/academy.html</loc></url>
-<url><loc>https://kreditor.pro/partners.html</loc></url>
-<url><loc>https://kreditor.pro/faq.html</loc></url>
-<url><loc>https://kreditor.pro/contacts.html</loc></url>
-<url><loc>https://kreditor.pro/practices/debt-recovery.html</loc></url>
-<url><loc>https://kreditor.pro/practices/debt-settlement.html</loc></url>
-<url><loc>https://kreditor.pro/practices/leasing.html</loc></url>
-<url><loc>https://kreditor.pro/practices/litigation.html</loc></url>
-<url><loc>https://kreditor.pro/practices/enforcement.html</loc></url>
-<url><loc>https://kreditor.pro/practices/corporate.html</loc></url>
-<url><loc>https://kreditor.pro/practices/contracts.html</loc></url>
-<url><loc>https://kreditor.pro/practices/legal-audit.html</loc></url>
-<url><loc>https://kreditor.pro/practices/business-representation.html</loc></url>
-<url><loc>https://kreditor.pro/practices/ongoing-support.html</loc></url>
-<url><loc>https://kreditor.pro/legal/privacy.html</loc></url>
-<url><loc>https://kreditor.pro/legal/confidentiality.html</loc></url>
-<url><loc>https://kreditor.pro/legal/terms.html</loc></url>
-<url><loc>https://kreditor.pro/legal/cookies.html</loc></url>
+  <url><loc>https://kreditor.pro/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 </urlset>
