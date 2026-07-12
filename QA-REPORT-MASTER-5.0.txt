@@ -1,0 +1,4 @@
+KREDITOR MASTER RELEASE 5.0 QA
+HTML pages: 15
+Broken local references: 0
+All local references resolve correctly.

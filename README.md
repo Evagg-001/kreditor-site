@@ -23,3 +23,8 @@ git commit -m "KREDITOR V5 final site"
 git pull origin main --rebase
 git push origin main
 ```
+
+## Master Release 5.0
+
+Этот пакет является консолидированной версией для тестирования в ветке `develop`.
+Документация находится в каталоге `docs/`.
