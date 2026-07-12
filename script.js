@@ -1,6 +1,6 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V8-20260712-FINAL"};
+const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V9-20260712-GROWTH"};
 
 function track(event,params={}){
   try{
@@ -84,6 +84,29 @@ $$("[data-contact-channel]").forEach(link=>{
     track("modal_contact_click",{
       page:location.pathname,
       channel:link.dataset.contactChannel||"unknown"
+    });
+  });
+});
+
+// KREDITOR V9: conversion and engagement analytics
+(()=>{
+  const fired=new Set(), marks=[25,50,75,90];
+  const onScroll=()=>{
+    const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    const depth=Math.round((scrollY/max)*100);
+    marks.forEach(mark=>{
+      if(depth>=mark&&!fired.has(mark)){
+        fired.add(mark);
+        if(typeof track==="function") track("scroll_depth",{page:location.pathname,percent:mark});
+      }
+    });
+  };
+  addEventListener("scroll",onScroll,{passive:true}); onScroll();
+})();
+document.querySelectorAll(".mobile-contact-bar [data-contact-channel]").forEach(link=>{
+  link.addEventListener("click",()=>{
+    if(typeof track==="function") track("mobile_contact_click",{
+      page:location.pathname,channel:link.dataset.contactChannel||"unknown"
     });
   });
 });
