@@ -1,0 +1,13 @@
+/* KREDITOR V11: выбор канала связи в формах */
+.lead-channel-block{margin-top:18px}
+.lead-channel-title{display:block;margin:0 0 10px;font-weight:700;color:#111b2d}
+.lead-channel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lead-channel-btn{min-height:54px;border:1px solid rgba(17,27,45,.16);border-radius:14px;background:#fff;color:#111b2d;font:700 15px/1.2 Manrope,Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease,transform .16s ease,box-shadow .16s ease;text-decoration:none}
+.lead-channel-btn:hover{border-color:#c79a3b;background:#fcf8ef;transform:translateY(-1px);box-shadow:0 8px 18px rgba(17,27,45,.07)}
+.lead-channel-btn:focus-visible{outline:3px solid rgba(199,154,59,.25);outline-offset:2px}
+.lead-channel-btn[data-channel="whatsapp"]{background:#c79a3b;border-color:#c79a3b;color:#111b2d}
+.lead-channel-btn[data-channel="whatsapp"]:hover{background:#d2a64a}
+.lead-channel-note{margin:10px 0 0;color:#697386;font-size:13px;line-height:1.45}
+.lead-channel-icon{font-size:17px;line-height:1}
+.modal .lead-channel-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:620px){.lead-channel-actions,.modal .lead-channel-actions{grid-template-columns:1fr}.lead-channel-btn{min-height:50px}}
