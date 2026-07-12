@@ -1,6 +1,6 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V9-20260712-GROWTH"};
+const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V10-20260712-CONVERSION"};
 
 function track(event,params={}){
   try{
@@ -110,3 +110,47 @@ document.querySelectorAll(".mobile-contact-bar [data-contact-channel]").forEach(
     });
   });
 });
+
+// KREDITOR V10: conversion analytics and friction diagnostics
+document.querySelectorAll('form[data-conversion-form="lead"]').forEach(form=>{
+  let started=false;
+  form.addEventListener("focusin",()=>{
+    if(!started){
+      started=true;
+      if(typeof track==="function") track("conversion_form_start",{page:location.pathname});
+    }
+  },{once:true});
+  form.addEventListener("submit",()=>{
+    if(typeof track==="function") track("conversion_submit_attempt",{page:location.pathname});
+  });
+});
+
+document.querySelectorAll("[data-analytics]").forEach(el=>{
+  el.addEventListener("click",()=>{
+    if(typeof track==="function") track(el.dataset.analytics,{page:location.pathname});
+  });
+});
+
+// Preserve campaign parameters without exposing sensitive values
+(()=>{
+  const params=new URLSearchParams(location.search);
+  const allowed=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  const campaign={};
+  allowed.forEach(key=>{
+    const value=params.get(key);
+    if(value) campaign[key]=value.slice(0,120);
+  });
+  if(Object.keys(campaign).length){
+    try{sessionStorage.setItem("kreditor_campaign",JSON.stringify(campaign));}catch(e){}
+  }
+  document.querySelectorAll('form[data-conversion-form="lead"]').forEach(form=>{
+    let data={};
+    try{data=JSON.parse(sessionStorage.getItem("kreditor_campaign")||"{}");}catch(e){}
+    Object.entries(data).forEach(([key,value])=>{
+      if(form.querySelector(`[name="${key}"]`)) return;
+      const input=document.createElement("input");
+      input.type="hidden"; input.name=key; input.value=value;
+      form.appendChild(input);
+    });
+  });
+})();

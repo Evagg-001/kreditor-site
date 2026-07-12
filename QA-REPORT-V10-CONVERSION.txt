@@ -1,0 +1,8 @@
+KREDITOR V10 CONVERSION QA REPORT
+HTML files: 16
+Lead forms marked: 17
+Desktop sticky CTA instances: 14
+Home conversion sections: 1
+Broken local references: 0
+Build ID: KREDITOR-V10-20260712-CONVERSION
+All local references resolve correctly.
