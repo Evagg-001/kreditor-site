@@ -140,12 +140,12 @@
 
     displayLabel(option) {
       const text = option.textContent.trim();
-      return ["Бизнес", "Представитель бизнеса", "Компания", "Корпоративный клиент"].includes(text) ? "Представитель организации" : text;
+      return text === "Бизнес" ? "Представитель организации" : text;
     }
 
     build() {
       this.select.classList.add("krc-native");
-      this.select.dataset.customized = "v13.1";
+      this.select.dataset.customized = "v10";
       this.select.setAttribute("aria-hidden", "true");
       this.select.tabIndex = -1;
 
@@ -238,7 +238,7 @@
   }
 
   selects.forEach((select, index) => {
-    if (select.dataset.customized === "v13.1") return;
+    if (select.dataset.customized === "v7") return;
     new RoleChoice(select, index);
   });
 })();
