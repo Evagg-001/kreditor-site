@@ -1,1 +1,3 @@
-window.KREDITOR_ANALYTICS={yandexMetrikaId:"",googleAnalyticsId:""};
+window.KREDITOR_ANALYTICS = {
+  yandexMetrikaId: 110621481
+};

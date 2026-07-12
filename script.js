@@ -5,7 +5,6 @@ const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru
 function track(event,params={}){
   try{
     if(typeof window.ym==="function" && window.KREDITOR_ANALYTICS?.yandexMetrikaId){window.ym(window.KREDITOR_ANALYTICS.yandexMetrikaId,"reachGoal",event,params)}
-    if(typeof window.gtag==="function") window.gtag("event",event,params);
     window.dispatchEvent(new CustomEvent("kreditor:analytics",{detail:{event,params}}));
   }catch(_){/* analytics must never block UX */}
 }
