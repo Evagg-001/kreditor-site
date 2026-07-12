@@ -1,30 +1,12 @@
-# KREDITOR.PRO V5 — production package
+# KREDITOR Master Release V6–V7
 
-Полный статический сайт для GitHub Pages в едином фирменном стиле.
+Production-ready static website for ООО «КРЕДИТОР».
 
-## Реализовано
-- Главная страница на основе утверждённого тёмно-синего дизайна
-- Внутренние страницы и 4 страницы практик
-- Адаптивная навигация и единый футер
-- Формы с переходом в WhatsApp
-- FAQ, правовые документы, 404
-- robots.txt, sitemap.xml, canonical, Open Graph, favicon
-- Cookie-уведомление
-- Подготовлен файл `analytics-config.js`
+Build ID: `KREDITOR-V7-20260712-PRODUCTION`
 
-## Важно
-Формы не сохраняют данные на сервере: они открывают WhatsApp с подготовленным сообщением. Для CRM/почтовой отправки потребуется отдельный серверный обработчик или внешний сервис форм.
+## Главное
+- Premium V5 design preserved
+- V6 communication and lead-flow improvements
+- V7 SEO, accessibility, analytics hooks and QA
 
-## Публикация
-Замените содержимое локальной папки `kreditor-site` файлами из этой папки, сохранив скрытую папку `.git`, затем выполните:
-```
-git add .
-git commit -m "KREDITOR V5 final site"
-git pull origin main --rebase
-git push origin main
-```
-
-## Master Release 5.0
-
-Этот пакет является консолидированной версией для тестирования в ветке `develop`.
-Документация находится в каталоге `docs/`.
+See `docs/DEPLOYMENT_V6_V7.md`.
