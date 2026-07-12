@@ -1,6 +1,6 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V7-20260712-PRODUCTION"};
+const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V8-20260712-FINAL"};
 
 function track(event,params={}){
   try{
@@ -77,3 +77,13 @@ if(cookie && localStorage.getItem("kreditor_cookie_ok")!=="1") setTimeout(()=>co
 $("#cookie-accept")?.addEventListener("click",()=>{localStorage.setItem("kreditor_cookie_ok","1");cookie.classList.remove("show");track("cookie_accept")});
 $$('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 utmData();
+
+
+$$("[data-contact-channel]").forEach(link=>{
+  link.addEventListener("click",()=>{
+    track("modal_contact_click",{
+      page:location.pathname,
+      channel:link.dataset.contactChannel||"unknown"
+    });
+  });
+});
