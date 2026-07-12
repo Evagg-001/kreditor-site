@@ -1,6 +1,6 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V10-20260712-CONVERSION"};
+const CONFIG={phone:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru",build:"KREDITOR-V15-STABLE"};
 
 function track(event,params={}){
   try{
@@ -28,44 +28,6 @@ function utmData(){
  const q=new URLSearchParams(location.search), keys=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
  const data={}; keys.forEach(k=>{const v=q.get(k)||sessionStorage.getItem(`kreditor_${k}`);if(v){data[k]=v;sessionStorage.setItem(`kreditor_${k}`,v)}}); return data;
 }
-function normalizePhone(v){return String(v||"").replace(/[^\d+]/g,"")}
-function validPhone(v){const n=normalizePhone(v).replace(/^8/,"7");return /^\+?\d{10,15}$/.test(n)}
-function addHoneypot(form){
- if(form.elements.website) return;
- const wrap=document.createElement("div");wrap.className="hp-field";wrap.setAttribute("aria-hidden","true");
- wrap.innerHTML='<label>Ваш сайт<input name="website" tabindex="-1" autocomplete="off"></label>';
- form.prepend(wrap);
-}
-function buildMessage(form){
- const d=Object.fromEntries(new FormData(form)); const utm=utmData();
- return ["Здравствуйте! Обращение с сайта kreditor.pro",`Страница: ${location.href.split("?")[0]}`,
- d.topic&&`Тема: ${d.topic}`,d.name&&`Имя: ${d.name}`,d.phone&&`Телефон: ${d.phone}`,
- d.email&&`Email: ${d.email}`,d.role&&`Категория: ${d.role}`,d.message&&`Ситуация: ${d.message}`,
- Object.keys(utm).length&&`Источник: ${Object.entries(utm).map(([k,v])=>`${k}=${v}`).join(", ")}`].filter(Boolean).join("\n");
-}
-function setStatus(form,text,type=""){
- let status=$(".form-status",form);if(!status){status=document.createElement("p");status.className="form-status";status.setAttribute("aria-live","polite");form.append(status)}
- status.textContent=text;status.className=`form-status ${type}`.trim();
-}
-$$('[data-lead-form]').forEach(form=>{
- addHoneypot(form); form.setAttribute("novalidate","");
- const phone=form.elements.phone; phone?.addEventListener("input",()=>phone.setCustomValidity(""));
- form.addEventListener("submit",e=>{
-  e.preventDefault();
-  if(form.elements.website?.value){setStatus(form,"Заявка не отправлена.","error");return}
-  if(phone && !validPhone(phone.value)){phone.setCustomValidity("Укажите телефон: от 10 до 15 цифр.");phone.reportValidity();setStatus(form,"Проверьте номер телефона.","error");return}
-  if(!form.checkValidity()){form.reportValidity();setStatus(form,"Проверьте обязательные поля и согласие.","error");return}
-  const last=Number(sessionStorage.getItem("kreditor_last_submit")||0);if(Date.now()-last<10000){setStatus(form,"Повторная отправка возможна через несколько секунд.","error");return}
-  sessionStorage.setItem("kreditor_last_submit",String(Date.now()));
-  const button=$("button[type=submit]",form), old=button?.textContent;if(button){button.disabled=true;button.textContent="Подготавливаем сообщение…"}
-  setStatus(form,"Открываем WhatsApp с подготовленным сообщением…","success");track("lead_form_submit",{page:location.pathname,role:form.elements.role?.value||""});
-  const url=`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(buildMessage(form))}`;
-  const popup=window.open(url,"_blank","noopener,noreferrer");
-  if(!popup){location.href=url}else{setTimeout(()=>{try{location.href="thank-you.html"}catch(_){}},700)}
-  setTimeout(()=>{if(button){button.disabled=false;button.textContent=old}},1500);
- });
-});
-
 $$('a[href^="tel:"]').forEach(a=>a.addEventListener("click",()=>track("click_phone",{page:location.pathname})));
 $$('a[href*="wa.me"]').forEach(a=>a.addEventListener("click",()=>track("click_whatsapp",{page:location.pathname})));
 $$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_telegram",{page:location.pathname})));
