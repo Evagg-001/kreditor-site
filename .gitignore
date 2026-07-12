@@ -4,3 +4,5 @@
 *.bak
 *.old
 .DS_Store
+# Local backups
+.kreditor-backups/
