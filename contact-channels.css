@@ -1,13 +1,25 @@
-/* KREDITOR V11: выбор канала связи в формах */
-.lead-channel-block{margin-top:18px}
-.lead-channel-title{display:block;margin:0 0 10px;font-weight:700;color:#111b2d}
+/* KREDITOR V12: единый сценарий формы и четыре канала связи */
+.lead-channel-block{display:none;margin-top:14px;padding-top:16px;border-top:1px solid rgba(17,27,45,.10)}
+.lead-channel-block.is-visible{display:block;animation:kreditorChannelsIn .18s ease both}
+.lead-channel-title{display:block;margin:0 0 11px;font-weight:700;color:#111b2d;text-align:center}
 .lead-channel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.lead-channel-btn{min-height:54px;border:1px solid rgba(17,27,45,.16);border-radius:14px;background:#fff;color:#111b2d;font:700 15px/1.2 Manrope,Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease,transform .16s ease,box-shadow .16s ease;text-decoration:none}
+.lead-channel-btn{min-height:56px;border:1px solid rgba(17,27,45,.15);border-radius:14px;background:#fff;color:#111b2d;font:700 15px/1.2 Manrope,Arial,sans-serif;display:flex;align-items:center;justify-content:flex-start;gap:11px;padding:12px 15px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease,transform .16s ease,box-shadow .16s ease;text-decoration:none}
 .lead-channel-btn:hover{border-color:#c79a3b;background:#fcf8ef;transform:translateY(-1px);box-shadow:0 8px 18px rgba(17,27,45,.07)}
 .lead-channel-btn:focus-visible{outline:3px solid rgba(199,154,59,.25);outline-offset:2px}
-.lead-channel-btn[data-channel="whatsapp"]{background:#c79a3b;border-color:#c79a3b;color:#111b2d}
-.lead-channel-btn[data-channel="whatsapp"]:hover{background:#d2a64a}
-.lead-channel-note{margin:10px 0 0;color:#697386;font-size:13px;line-height:1.45}
-.lead-channel-icon{font-size:17px;line-height:1}
-.modal .lead-channel-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:620px){.lead-channel-actions,.modal .lead-channel-actions{grid-template-columns:1fr}.lead-channel-btn{min-height:50px}}
+.lead-channel-icon{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:grid;place-items:center;background:#0d1b30;color:#d0a64a;font-weight:800;font-size:16px;line-height:1}
+.lead-channel-copy{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.lead-channel-copy small{font-weight:500;font-size:11px;color:#697386}
+.lead-channel-note{margin:10px 0 0;color:#697386;font-size:12px;line-height:1.45;text-align:center}
+.lead-continue-btn.is-complete{background:#c79a3b;border-color:#c79a3b;color:#111b2d}
+.modal-contact-alternatives{display:none!important}
+@keyframes kreditorChannelsIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+/* Плавающий виджет: основная кнопка + четыре понятных канала */
+.desktop-sticky-cta{gap:6px!important}
+.desktop-sticky-cta .desktop-sticky-main{white-space:nowrap}
+.desktop-sticky-cta .kreditor-sticky-channel{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#22344d;color:#fff;text-decoration:none;font:800 15px/1 Manrope,Arial,sans-serif;border:1px solid rgba(255,255,255,.08);transition:transform .16s ease,background-color .16s ease}
+.desktop-sticky-cta .kreditor-sticky-channel:hover{transform:translateY(-1px);background:#2d4565}
+.desktop-sticky-cta .kreditor-sticky-channel:focus-visible{outline:3px solid rgba(199,154,59,.35);outline-offset:2px}
+.desktop-sticky-cta .kreditor-sticky-channel[data-contact-channel="whatsapp"]{color:#d0a64a}
+
+@media(max-width:620px){.lead-channel-actions{grid-template-columns:1fr}.lead-channel-btn{min-height:52px}}

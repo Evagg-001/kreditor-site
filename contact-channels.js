@@ -2,7 +2,6 @@
 (()=>{
   const CONFIG={phone:"+79777379737",phoneDigits:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru"};
   const forms=[...document.querySelectorAll('[data-lead-form]')];
-  if(!forms.length)return;
 
   const normalizePhone=v=>String(v||"").replace(/[^\d+]/g,"");
   const validPhone=v=>/^\+?\d{10,15}$/.test(normalizePhone(v).replace(/^8/,"7"));
@@ -24,7 +23,7 @@
     if(!el){el=document.createElement("p");el.className="form-status";el.setAttribute("aria-live","polite");form.append(el)}
     el.textContent=text;el.className=`form-status ${type}`.trim();
   };
-  const analytics=(event,channel)=>{
+  const analytics=(event,channel="")=>{
     try{
       const id=window.KREDITOR_ANALYTICS?.yandexMetrikaId;
       if(typeof window.ym==="function"&&id)window.ym(id,"reachGoal",event,{page:location.pathname,channel});
@@ -44,26 +43,51 @@
   };
   const copy=async text=>{try{await navigator.clipboard.writeText(text);return true}catch(_){return false}};
 
-  forms.forEach(form=>{
-    const submit=form.querySelector('button[type="submit"]');
-    if(!submit||form.querySelector(".lead-channel-block"))return;
-    submit.hidden=true;submit.setAttribute("aria-hidden","true");submit.tabIndex=-1;
-
+  const buildChannelBlock=()=>{
     const block=document.createElement("div");
     block.className="lead-channel-block";
+    block.setAttribute("aria-hidden","true");
     block.innerHTML=`
       <span class="lead-channel-title">Выберите удобный способ связи</span>
       <div class="lead-channel-actions" role="group" aria-label="Способ связи">
-        <button class="lead-channel-btn" type="button" data-channel="whatsapp"><span class="lead-channel-icon">W</span>WhatsApp</button>
-        <button class="lead-channel-btn" type="button" data-channel="telegram"><span class="lead-channel-icon">T</span>Telegram</button>
-        <button class="lead-channel-btn" type="button" data-channel="phone"><span class="lead-channel-icon">☎</span>Позвонить</button>
-        <button class="lead-channel-btn" type="button" data-channel="email"><span class="lead-channel-icon">✉</span>Email</button>
+        <button class="lead-channel-btn" type="button" data-channel="whatsapp"><span class="lead-channel-icon">W</span><span class="lead-channel-copy">WhatsApp<small>Открыть чат</small></span></button>
+        <button class="lead-channel-btn" type="button" data-channel="telegram"><span class="lead-channel-icon">T</span><span class="lead-channel-copy">Telegram<small>@ooo_kreditor</small></span></button>
+        <button class="lead-channel-btn" type="button" data-channel="phone"><span class="lead-channel-icon">☎</span><span class="lead-channel-copy">Позвонить<small>+7 (977) 737-97-37</small></span></button>
+        <button class="lead-channel-btn" type="button" data-channel="email"><span class="lead-channel-icon">✉</span><span class="lead-channel-copy">Email<small>kreditoro@bk.ru</small></span></button>
       </div>
-      <p class="lead-channel-note">Перед переходом проверьте введённые данные. Для Telegram текст обращения будет скопирован в буфер обмена.</p>`;
-    submit.insertAdjacentElement("afterend",block);
+      <p class="lead-channel-note">Сообщение будет подготовлено автоматически. Отправка произойдёт только после вашего подтверждения.</p>`;
+    return block;
+  };
+
+  forms.forEach(form=>{
+    const submit=form.querySelector('button[type="submit"]');
+    if(!submit)return;
+    submit.hidden=false;submit.removeAttribute("aria-hidden");submit.tabIndex=0;
+    submit.textContent="Продолжить";
+    submit.classList.add("lead-continue-btn");
+
+    let block=form.querySelector(".lead-channel-block");
+    if(!block){block=buildChannelBlock();submit.insertAdjacentElement("afterend",block)}
+    else block.classList.remove("is-visible");
+
+    const reveal=()=>{
+      if(!validate(form))return false;
+      block.classList.add("is-visible");block.setAttribute("aria-hidden","false");
+      submit.classList.add("is-complete");submit.textContent="Выберите способ связи";
+      setStatus(form,"Выберите один из четырёх удобных способов связи.","success");
+      block.scrollIntoView({behavior:"smooth",block:"nearest"});
+      block.querySelector(".lead-channel-btn")?.focus({preventScroll:true});
+      analytics("lead_form_continue");
+      return true;
+    };
+
+    form.addEventListener("submit",e=>{
+      e.preventDefault();e.stopImmediatePropagation();reveal();
+    },true);
 
     block.addEventListener("click",async e=>{
       const btn=e.target.closest("[data-channel]");if(!btn)return;
+      e.preventDefault();e.stopPropagation();
       if(!validate(form))return;
       const channel=btn.dataset.channel;const text=message(form);analytics("lead_channel_select",channel);
       if(channel==="whatsapp"){
@@ -74,19 +98,32 @@
         setStatus(form,ok?"Текст обращения скопирован. Открываем Telegram…":"Открываем Telegram. Текст можно скопировать из формы.","success");
         window.open(`https://t.me/${CONFIG.telegram}`,"_blank","noopener,noreferrer");
       }else if(channel==="phone"){
-        setStatus(form,"Открываем приложение для звонка…","success");
-        location.href=`tel:${CONFIG.phone}`;
+        setStatus(form,"Открываем приложение для звонка…","success");location.href=`tel:${CONFIG.phone}`;
       }else if(channel==="email"){
-        const subject="Обращение с сайта КРЕДИТОР";
         setStatus(form,"Открываем почтовое приложение…","success");
-        location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+        location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Обращение с сайта КРЕДИТОР")}&body=${encodeURIComponent(text)}`;
       }
     });
+  });
 
-    form.addEventListener("submit",e=>{
-      e.preventDefault();e.stopImmediatePropagation();
-      setStatus(form,"Выберите способ связи: WhatsApp, Telegram, звонок или Email.","error");
-      block.querySelector(".lead-channel-btn")?.focus();
-    },true);
+  document.querySelectorAll(".desktop-sticky-cta").forEach(widget=>{
+    const main=widget.querySelector(".desktop-sticky-main");
+    if(main){main.textContent="Обсудить ситуацию";main.classList.add("js-open-lead");main.setAttribute("data-open-modal","")}
+    widget.querySelectorAll("a").forEach(a=>a.remove());
+    const channels=[
+      ["phone",`tel:${CONFIG.phone}`,"☎","Позвонить"],
+      ["whatsapp",`https://wa.me/${CONFIG.phoneDigits}`,"W","WhatsApp"],
+      ["telegram",`https://t.me/${CONFIG.telegram}`,"T","Telegram"],
+      ["email",`mailto:${CONFIG.email}?subject=${encodeURIComponent("Обращение с сайта КРЕДИТОР")}`,"✉","Email"]
+    ];
+    channels.forEach(([channel,href,label,aria])=>{
+      const a=document.createElement("a");a.className="kreditor-sticky-channel";a.dataset.contactChannel=channel;a.href=href;a.textContent=label;a.setAttribute("aria-label",aria);
+      if(channel==="whatsapp"||channel==="telegram"){a.target="_blank";a.rel="noopener"}
+      a.addEventListener("click",()=>analytics("sticky_contact_click",channel));widget.append(a);
+    });
+    if(main&&!main.dataset.v12Bound){
+      main.dataset.v12Bound="1";
+      main.addEventListener("click",()=>{document.querySelector("#lead-modal")?.showModal();analytics("sticky_open_form")});
+    }
   });
 })();
