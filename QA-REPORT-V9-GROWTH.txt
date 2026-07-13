@@ -1,8 +1,0 @@
-KREDITOR V9 GROWTH QA REPORT
-HTML files: 16
-Pages with OpenGraph: 16
-JSON-LD blocks: 16
-Pages with mobile contact bar: 14
-Broken local references: 0
-Build ID: KREDITOR-V9-20260712-GROWTH
-All local references resolve correctly.

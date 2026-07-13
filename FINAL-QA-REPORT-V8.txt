@@ -1,8 +1,0 @@
-KREDITOR V8 FINAL QA REPORT
-HTML files: 16
-Pages with lead modal: 15
-Modal contact links: 60
-Expected modal contact links: 60
-Broken local references: 0
-Updated modal pages: 15
-All local references resolve correctly.
