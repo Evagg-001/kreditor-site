@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <link href="app.css" rel="stylesheet"/>
 <link href="https://kreditor.pro/" rel="canonical"/><link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/><meta content="#07172a" name="theme-color"/><link href="site.webmanifest" rel="manifest"/><meta content="summary_large_image" name="twitter:card"/><meta content="КРЕДИТОР — федеральная юридическая платформа" name="twitter:title"/><meta content="Взыскание долгов, урегулирование задолженности, корпоративные и лизинговые юридические решения по всей России." name="twitter:description"/><meta content="https://kreditor.pro/assets/hero.webp" name="twitter:image"/><script data-schema="organization" type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "ООО «КРЕДИТОР»", "url": "https://kreditor.pro/", "logo": "https://kreditor.pro/assets/favicon.svg", "image": "https://kreditor.pro/assets/hero.jpg.png", "telephone": "+7-977-737-97-37", "email": "kreditoro@bk.ru", "areaServed": "RU", "address": {"@type": "PostalAddress", "addressLocality": "Москва", "addressCountry": "RU"}, "sameAs": ["https://t.me/ooo_kreditor", "https://wa.me/79777379737"]}</script><meta content="strict-origin-when-cross-origin" name="referrer"/><meta content="telephone=no" name="format-detection"/><meta content="website" property="og:type"/><meta content="КРЕДИТОР" property="og:site_name"/><meta content="ru_RU" property="og:locale"/><meta content="КРЕДИТОР — федеральная юридическая платформа" property="og:title"/><meta content="Взыскание долгов, урегулирование задолженности, корпоративные и лизинговые юридические решения по всей России." property="og:description"/><meta content="https://kreditor.pro/" property="og:url"/><meta content="https://kreditor.pro/assets/hero.webp" property="og:image"/><link as="image" fetchpriority="high" href="assets/hero.webp" rel="preload"/><link href="https://mc.yandex.ru" rel="dns-prefetch"/></head>
-<body data-build="KREDITOR-V17.0-PRODUCTION"><noscript><div><img alt="" src="https://mc.yandex.ru/watch/110621481" style="position:absolute;left:-9999px"/></div></noscript><a class="skip-link" href="#main">Перейти к содержанию</a>
+<body data-build="KREDITOR-V17.0-PRODUCTION"><a class="skip-link" href="#main">Перейти к содержанию</a>
 <header class="site-header" id="top">
 <div class="container nav-wrap">
 <a aria-label="Кредитор — на главную" class="brand" href="#top">
@@ -50,8 +50,8 @@
 </div>
 <div aria-label="Быстрые способы связи" class="quick-contact-row">
 <a href="tel:+79777379737"><small data-i18n="phone">Телефон</small><strong>+7 (977) 737-97-37</strong></a>
-<a href="https://wa.me/79777379737" rel="noopener" target="_blank"><small>WhatsApp</small><strong>+7 (977) 737-97-37</strong></a>
-<a href="https://t.me/ooo_kreditor" rel="noopener" target="_blank"><small>Telegram</small><strong>@ooo_kreditor</strong></a>
+<a href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank"><small>WhatsApp</small><strong>+7 (977) 737-97-37</strong></a>
+<a href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank"><small>Telegram</small><strong>@ooo_kreditor</strong></a>
 </div>
 </div>
 <div class="hero-visual reveal">
@@ -224,18 +224,18 @@
 <p data-i18n="contactLead">Выберите удобный способ связи. После заполнения формы сообщение будет подготовлено автоматически, а отправка произойдёт только после вашего подтверждения.</p>
 <div class="contact-cards">
 <a class="contact-card" href="tel:+79777379737"><span data-i18n="phone">Телефон</span><strong>+7 (977) 737-97-37</strong><b data-i18n="call">Позвонить →</b></a>
-<a class="contact-card" href="https://wa.me/79777379737" rel="noopener" target="_blank"><span>WhatsApp</span><strong>+7 (977) 737-97-37</strong><b data-i18n="openWhatsApp">Открыть WhatsApp →</b></a>
-<a class="contact-card" href="https://t.me/ooo_kreditor" rel="noopener" target="_blank"><span>Telegram</span><strong>@ooo_kreditor</strong><b data-i18n="openTelegram">Открыть Telegram →</b></a>
+<a class="contact-card" href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank"><span>WhatsApp</span><strong>+7 (977) 737-97-37</strong><b data-i18n="openWhatsApp">Открыть WhatsApp →</b></a>
+<a class="contact-card" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank"><span>Telegram</span><strong>@ooo_kreditor</strong><b data-i18n="openTelegram">Открыть Telegram →</b></a>
 <a class="contact-card" href="mailto:kreditoro@bk.ru"><span>Email</span><strong>kreditoro@bk.ru</strong><b data-i18n="sendEmail">Отправить письмо →</b></a>
 </div>
 <p class="address-line"><strong data-i18n="moscow">г. Москва</strong> · <span data-i18n="aroundClock">круглосуточно</span></p>
 </div>
 <form class="contact-form reveal" data-conversion-form="lead" data-lead-form="" data-whatsapp-form="">
-<label><span data-i18n="name">Имя</span><input autocomplete="name" name="name" required=""/></label>
+<label><span data-i18n="name">Имя</span><input autocomplete="name" maxlength="100" name="name" required type="text"/></label>
 <label><span data-i18n="phone">Телефон</span><input autocomplete="tel" name="phone" required="" type="tel"/></label>
 <label><span data-i18n="role">Ваша роль</span><select name="role"><option data-i18n="role1" value="Взыскатель">Взыскатель</option><option data-i18n="role2" value="Должник">Должник</option><option data-i18n="role3" value="Бизнес">Представитель организации</option><option data-i18n="role4" value="Лизинговая компания">Лизинговая компания</option><option data-i18n="role5" value="Партнёр">Партнёр</option></select></label>
 <label><span data-i18n="describe">Кратко опишите ситуацию</span><textarea name="message" rows="5"></textarea></label>
-<label class="consent"><input required="" type="checkbox"/><span data-i18n="consent">Согласен на обработку персональных данных для ответа на обращение.</span></label>
+<label class="consent"><input name="consent" required type="checkbox" value="accepted"/><span data-i18n="consent">Согласен на обработку персональных данных для ответа на обращение.</span></label>
 <button class="btn btn-primary" data-i18n="continueWhatsApp" type="submit">Продолжить</button>
 <p class="form-note" data-i18n="formNote">После проверки формы выберите удобный способ связи. Сообщение будет подготовлено автоматически.</p>
 <input name="page_url" type="hidden" value="index.html"/><input name="source" type="hidden" value="website"/></form>
@@ -246,7 +246,7 @@
 <div class="container footer-grid">
 <div><a class="brand" href="#top"><span class="brand-mark">К</span><span><strong>КРЕДИТОР</strong><small data-i18n="footerTag">федеральная юридическая платформа</small></span></a><p data-i18n="footerText">Сопровождение взыскателей, должников, бизнеса и лизинговых компаний на русском и английском языках.</p></div>
 <div><h3 data-i18n="navDirections">Направления</h3><a data-i18n="navDirections" href="#audiences">Направления</a><a data-i18n="navJourney" href="#journey">Как мы работаем</a><a data-i18n="navTiming" href="#timing">Сроки</a><a data-i18n="navPromise" href="#promise">Наш кодекс</a></div>
-<div><h3 data-i18n="navContacts">Контакты</h3><a href="tel:+79777379737">+7 (977) 737-97-37</a><a href="https://wa.me/79777379737" rel="noopener" target="_blank">WhatsApp: +7 (977) 737-97-37</a><a href="https://t.me/ooo_kreditor" rel="noopener" target="_blank">Telegram: @ooo_kreditor</a><a href="mailto:kreditoro@bk.ru">kreditoro@bk.ru</a></div>
+<div><h3 data-i18n="navContacts">Контакты</h3><a href="tel:+79777379737">+7 (977) 737-97-37</a><a href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank">WhatsApp: +7 (977) 737-97-37</a><a href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank">Telegram: @ooo_kreditor</a><a href="mailto:kreditoro@bk.ru">kreditoro@bk.ru</a></div>
 <div><h3 data-i18n="details">Реквизиты</h3><span>ООО «КРЕДИТОР»</span><span>ИНН 6167211465</span><span>КПП 616701001</span><span>ОГРН 1266100010307</span></div>
 </div>
 <div class="container footer-bottom"><span>© 2026 ООО «КРЕДИТОР». <span data-i18n="rights">Все права защищены.</span></span><span data-i18n="testNote">Информация на сайте не является публичной офертой</span></div>
@@ -276,11 +276,11 @@
 <span aria-hidden="true" class="modal-contact-icon">☎</span>
 <span><strong>Позвонить</strong><small>+7 (977) 737-97-37</small></span>
 </a>
-<a class="modal-contact-link" data-contact-channel="whatsapp" href="https://wa.me/79777379737" rel="noopener" target="_blank">
+<a class="modal-contact-link" data-contact-channel="whatsapp" href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank">
 <span aria-hidden="true" class="modal-contact-icon">W</span>
 <span><strong>WhatsApp</strong><small>Открыть чат</small></span>
 </a>
-<a class="modal-contact-link" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener" target="_blank">
+<a class="modal-contact-link" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank">
 <span aria-hidden="true" class="modal-contact-icon">T</span>
 <span><strong>Telegram</strong><small>@ooo_kreditor</small></span>
 </a>
@@ -291,17 +291,17 @@
 </div>
 </div>
 </dialog>
-<script defer="True" src="app.js"></script><script defer="" src="role-select.js"></script>
+<script defer src="app.js"></script><script defer="" src="role-select.js"></script>
 
-<div class="cookie-banner" id="cookie-banner"><p>Сайт использует технические cookie. <a href="legal/cookies.html"><u>Подробнее</u></a>.</p><button class="btn btn-primary" id="cookie-accept">Хорошо</button></div><nav aria-label="Быстрые способы связи" class="mobile-contact-bar">
+<div aria-label="Настройки файлов cookie" class="cookie-banner" id="cookie-banner" role="dialog"><p>Сайт использует обязательные файлы cookie и, с вашего согласия, Яндекс.Метрику. Подробнее — в <a href="legal/cookies.html"><u>политике Cookie</u></a>.</p><div class="cookie-actions"><button class="btn btn-primary" id="cookie-accept" type="button">Разрешить аналитику</button><button class="btn btn-ghost" id="cookie-reject" type="button">Только обязательные</button></div></div><nav aria-label="Быстрые способы связи" class="mobile-contact-bar">
 <a data-contact-channel="phone" href="tel:+79777379737"><span>☎</span><small>Позвонить</small></a>
-<a data-contact-channel="whatsapp" href="https://wa.me/79777379737" rel="noopener" target="_blank"><span>W</span><small>WhatsApp</small></a>
-<a data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener" target="_blank"><span>T</span><small>Telegram</small></a>
+<a data-contact-channel="whatsapp" href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank"><span>W</span><small>WhatsApp</small></a>
+<a data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank"><span>T</span><small>Telegram</small></a>
 </nav><aside aria-label="Быстрая консультация" class="desktop-sticky-cta">
 <button class="desktop-sticky-main js-open-lead" data-analytics="sticky_open_form" type="button">
             Разобрать ситуацию
           </button>
 <a aria-label="Позвонить" data-contact-channel="phone" href="tel:+79777379737">☎</a>
-<a aria-label="Написать в Telegram" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener" target="_blank">T</a>
+<a aria-label="Написать в Telegram" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank">T</a>
 </aside></body>
 </html>

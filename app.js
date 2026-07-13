@@ -1,40 +1,50 @@
 /* analytics-config.js */
 window.KREDITOR_ANALYTICS = {
-  yandexMetrikaId: 110621481
+  yandexMetrikaId: 110621481,
+  consentKey: "kreditor_analytics_consent"
 };
 
-/* yandex-metrika.js */
+/* consent-aware yandex-metrika.js */
 (function (window, document) {
   "use strict";
 
   var config = window.KREDITOR_ANALYTICS || {};
   var counterId = Number(config.yandexMetrikaId);
+  var consentKey = config.consentKey || "kreditor_analytics_consent";
+  var initialized = false;
 
-  if (!Number.isInteger(counterId) || counterId <= 0) return;
+  function hasConsent() {
+    try { return window.localStorage.getItem(consentKey) === "accepted"; }
+    catch (_) { return false; }
+  }
 
-  (function (m, e, t, r, i, k, a) {
-    m[i] = m[i] || function () {
-      (m[i].a = m[i].a || []).push(arguments);
-    };
-    m[i].l = 1 * new Date();
+  function init() {
+    if (initialized || !Number.isInteger(counterId) || counterId <= 0 || !hasConsent()) return;
+    initialized = true;
 
-    for (var j = 0; j < document.scripts.length; j += 1) {
-      if (document.scripts[j].src === r) return;
-    }
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+      m[i].l = 1 * new Date();
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = true;
+      k.src = r;
+      k.referrerPolicy = "strict-origin-when-cross-origin";
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    k = e.createElement(t);
-    a = e.getElementsByTagName(t)[0];
-    k.async = 1;
-    k.src = r;
-    a.parentNode.insertBefore(k, a);
-  })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    window.ym(counterId, "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true
+    });
+  }
 
-  window.ym(counterId, "init", {
-    clickmap: true,
-    trackLinks: true,
-    accurateTrackBounce: true,
-    webvisor: true
-  });
+  window.KreditorAnalytics = { init: init, hasConsent: hasConsent };
+  init();
 })(window, document);
 
 /* components.js */
@@ -229,8 +239,35 @@ $$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_tel
 $$('a[href^="mailto:"]').forEach(a=>a.addEventListener("click",()=>track("click_email",{page:location.pathname})));
 
 const cookie=$("#cookie-banner");
-if(cookie && localStorage.getItem("kreditor_cookie_ok")!=="1") setTimeout(()=>cookie.classList.add("show"),500);
-$("#cookie-accept")?.addEventListener("click",()=>{localStorage.setItem("kreditor_cookie_ok","1");cookie.classList.remove("show");track("cookie_accept")});
+const consentKey=window.KREDITOR_ANALYTICS?.consentKey||"kreditor_analytics_consent";
+let consentValue="";
+try{consentValue=localStorage.getItem(consentKey)||""}catch(_){}
+
+function setCookieConsentPending(isPending){
+  document.body.classList.toggle("cookie-consent-pending",Boolean(isPending));
+}
+
+function finishCookieChoice(){
+  cookie?.classList.remove("show");
+  setCookieConsentPending(false);
+}
+
+if(cookie&&!consentValue){
+  setCookieConsentPending(true);
+  setTimeout(()=>cookie.classList.add("show"),300);
+}
+
+$("#cookie-accept")?.addEventListener("click",()=>{
+  try{localStorage.setItem(consentKey,"accepted")}catch(_){}
+  finishCookieChoice();
+  window.KreditorAnalytics?.init();
+  track("cookie_accept");
+});
+$("#cookie-reject")?.addEventListener("click",()=>{
+  try{localStorage.setItem(consentKey,"rejected")}catch(_){}
+  finishCookieChoice();
+  track("cookie_reject");
+});
 $$('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 utmData();
 
