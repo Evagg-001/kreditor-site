@@ -281,51 +281,6 @@ $$("[data-contact-channel]").forEach(link=>{
   });
 });
 
-// KREDITOR V9: conversion and engagement analytics
-(()=>{
-  const fired = new Set();
-  const marks = [25, 50, 75, 90];
-  let maxScroll = 1;
-  let ticking = false;
-
-  const updateMaxScroll = () => {
-    maxScroll = Math.max(
-      1,
-      document.documentElement.scrollHeight - window.innerHeight
-    );
-  };
-
-  const measureScroll = () => {
-    ticking = false;
-    const depth = Math.round((window.scrollY / maxScroll) * 100);
-
-    marks.forEach(mark => {
-      if (depth >= mark && !fired.has(mark)) {
-        fired.add(mark);
-        if (typeof track === "function") {
-          track("scroll_depth", {
-            page: location.pathname,
-            percent: mark
-          });
-        }
-      }
-    });
-  };
-
-  const onScroll = () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(measureScroll);
-    }
-  };
-
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", updateMaxScroll, { passive: true });
-  addEventListener("load", () => {
-    updateMaxScroll();
-    onScroll();
-  }, { once: true });
-})();
 document.querySelectorAll(".mobile-contact-bar [data-contact-channel]").forEach(link=>{
   link.addEventListener("click",()=>{
     if(typeof track==="function") track("mobile_contact_click",{
