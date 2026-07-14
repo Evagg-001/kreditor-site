@@ -1,8 +1,36 @@
-# Temporary and backup files
-*.backup
-*.backup-*
-*.bak
-*.old
+# macOS
 .DS_Store
-# Local backups
-.kreditor-backups/assets/hero-original.webp
+.AppleDouble
+.LSOverride
+
+# IDE
+.idea/
+.vscode/settings.json
+
+# Logs
+logs/
+*.log
+
+# Build
+build/
+dist/
+
+# Temporary
+tmp/
+*.tmp
+*.swp
+*.bak
+
+# Environment
+.env
+.env.*
+
+# Archives
+__MACOSX/
+
+# Python
+__pycache__/
+
+# Backup files
+*.before-*
+*-original.*
