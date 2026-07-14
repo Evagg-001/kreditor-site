@@ -5,4 +5,4 @@
 *.old
 .DS_Store
 # Local backups
-.kreditor-backups/
+.kreditor-backups/assets/hero-original.webp
