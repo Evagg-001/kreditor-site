@@ -34,3 +34,6 @@ __pycache__/
 # Backup files
 *.before-*
 *-original.*
+# Local analysis reports
+APP_*_MAP.txt
+APP_FUNCTIONS.txt
