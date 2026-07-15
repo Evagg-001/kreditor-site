@@ -1,114 +1,48 @@
+/* analytics-config.js */
+window.KREDITOR_ANALYTICS = {
+  yandexMetrikaId: 110621481,
+  consentKey: "kreditor_analytics_consent"
+};
+
+/* consent-aware yandex-metrika.js */
 (function (window, document) {
   "use strict";
 
-  const DEFAULT_CONFIG = Object.freeze({
-    yandexMetrikaId: 110621481,
-    consentKey: "kreditor_analytics_consent"
-  });
-
-  let initialized = false;
-
-  function getConfig() {
-    return Object.assign(
-      {},
-      DEFAULT_CONFIG,
-      window.KREDITOR_ANALYTICS || {}
-    );
-  }
+  var config = window.KREDITOR_ANALYTICS || {};
+  var counterId = Number(config.yandexMetrikaId);
+  var consentKey = config.consentKey || "kreditor_analytics_consent";
+  var initialized = false;
 
   function hasConsent() {
-    const { consentKey } = getConfig();
-
-    try {
-      return window.localStorage.getItem(consentKey) === "accepted";
-    } catch {
-      return false;
-    }
+    try { return window.localStorage.getItem(consentKey) === "accepted"; }
+    catch { return false; }
   }
 
-  function loadYandexMetrika(counterId) {
-    if (typeof window.ym === "function") {
-      return;
-    }
+  function init() {
+    if (initialized || !Number.isInteger(counterId) || counterId <= 0 || !hasConsent()) return;
+    initialized = true;
 
-    window.ym = window.ym || function () {
-      (window.ym.a = window.ym.a || []).push(arguments);
-    };
-
-    window.ym.l = Date.now();
-
-    const script = document.createElement("script");
-    const firstScript = document.getElementsByTagName("script")[0];
-
-    script.async = true;
-    script.src = "https://mc.yandex.ru/metrika/tag.js";
-    script.referrerPolicy = "strict-origin-when-cross-origin";
-
-    firstScript.parentNode.insertBefore(script, firstScript);
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+      m[i].l = 1 * new Date();
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = true;
+      k.src = r;
+      k.referrerPolicy = "strict-origin-when-cross-origin";
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
     window.ym(counterId, "init", {
       clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
-      webvisor: false
+      webvisor: true
     });
   }
 
-  function init() {
-    const { yandexMetrikaId } = getConfig();
-    const counterId = Number(yandexMetrikaId);
-
-    if (
-      initialized ||
-      !Number.isInteger(counterId) ||
-      counterId <= 0 ||
-      !hasConsent()
-    ) {
-      return false;
-    }
-
-    initialized = true;
-    loadYandexMetrika(counterId);
-
-    return true;
-  }
-
-  function track(eventName, parameters = {}) {
-    if (typeof eventName !== "string" || !eventName.trim()) {
-      return false;
-    }
-
-    const { yandexMetrikaId } = getConfig();
-    const counterId = Number(yandexMetrikaId);
-
-    try {
-      if (
-        hasConsent() &&
-        Number.isInteger(counterId) &&
-        counterId > 0 &&
-        typeof window.ym === "function"
-      ) {
-        window.ym(counterId, "reachGoal", eventName, parameters);
-      }
-
-      window.dispatchEvent(
-        new CustomEvent("kreditor:analytics", {
-          detail: {
-            event: eventName,
-            params: parameters
-          }
-        })
-      );
-
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  window.KreditorAnalytics = Object.freeze({
-    init,
-    track,
-    hasConsent
-  });
+  window.KreditorAnalytics = { init: init, hasConsent: hasConsent };
+  init();
 })(window, document);
