@@ -231,40 +231,6 @@ $$('a[href*="wa.me"]').forEach(a=>a.addEventListener("click",()=>track("click_wh
 $$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_telegram",{page:location.pathname})));
 $$('a[href^="mailto:"]').forEach(a=>a.addEventListener("click",()=>track("click_email",{page:location.pathname})));
 
-const cookie=$("#cookie-banner");
-const consentKey=window.KREDITOR_ANALYTICS?.consentKey||"kreditor_analytics_consent";
-let consentValue="";
-try{consentValue=localStorage.getItem(consentKey)||""}catch(_){}
-
-function setCookieConsentPending(isPending){
-  document.body.classList.toggle("cookie-consent-pending",Boolean(isPending));
-}
-
-function finishCookieChoice(){
-  cookie?.classList.remove("show");
-  setCookieConsentPending(false);
-}
-
-if(cookie&&!consentValue){
-  setCookieConsentPending(true);
-  setTimeout(()=>cookie.classList.add("show"),300);
-}
-
-$("#cookie-accept")?.addEventListener("click",()=>{
-  try{localStorage.setItem(consentKey,"accepted")}catch(_){}
-  finishCookieChoice();
-  window.KreditorAnalytics?.init();
-  track("cookie_accept");
-});
-$("#cookie-reject")?.addEventListener("click",()=>{
-  try{localStorage.setItem(consentKey,"rejected")}catch(_){}
-  finishCookieChoice();
-  track("cookie_reject");
-});
-$$('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
-utmData();
-
-
 $$("[data-contact-channel]").forEach(link=>{
   link.addEventListener("click",()=>{
     track("modal_contact_click",{

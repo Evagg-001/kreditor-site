@@ -71,7 +71,11 @@ if (window.KreditorUTM) {
     window.KreditorUTM.initialize();
 }
 }
-      initializeSecurity();
+      if (window.KreditorCookieBanner) {
+      window.KreditorCookieBanner.initialize();
+    }
+
+    initializeSecurity();
       initializeAnalytics();
       emitReadyEvent();
 
