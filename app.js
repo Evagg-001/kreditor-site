@@ -214,25 +214,18 @@ function track(event,params={}){
   }catch(_){/* analytics must never block UX */}
 }
 
-const menu=$(".menu-toggle"), nav=$("#main-nav");
-menu?.addEventListener("click",()=>{const open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));});
-$$("#main-nav a").forEach(a=>a.addEventListener("click",()=>{nav?.classList.remove("open");menu?.setAttribute("aria-expanded","false")}));
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){nav?.classList.remove("open");menu?.setAttribute("aria-expanded","false");$("#lead-modal")?.close()}});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    $("#lead-modal")?.close();
+  }
+});
 
-const modal=$("#lead-modal");
-$$('[data-open-modal]').forEach(b=>b.addEventListener("click",()=>{modal?.showModal();track("open_lead_modal",{page:location.pathname})}));
-$("[data-close-modal]")?.addEventListener("click",()=>modal?.close());
-modal?.addEventListener("click",e=>{if(e.target===modal)modal.close()});
 
 if("IntersectionObserver" in window){
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");io.unobserve(e.target)}}),{threshold:.1});
  $$(".reveal").forEach(el=>io.observe(el));
 }else $$(".reveal").forEach(el=>el.classList.add("is-visible"));
 
-function utmData(){
- const q=new URLSearchParams(location.search), keys=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
- const data={}; keys.forEach(k=>{const v=q.get(k)||sessionStorage.getItem(`kreditor_${k}`);if(v){data[k]=v;sessionStorage.setItem(`kreditor_${k}`,v)}}); return data;
-}
 $$('a[href^="tel:"]').forEach(a=>a.addEventListener("click",()=>track("click_phone",{page:location.pathname})));
 $$('a[href*="wa.me"]').forEach(a=>a.addEventListener("click",()=>track("click_whatsapp",{page:location.pathname})));
 $$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_telegram",{page:location.pathname})));
