@@ -66,6 +66,10 @@
 if (window.KreditorReveal) {
     window.KreditorReveal.initialize();
 }
+
+if (window.KreditorUTM) {
+    window.KreditorUTM.initialize();
+}
 }
       initializeSecurity();
       initializeAnalytics();

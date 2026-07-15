@@ -226,10 +226,6 @@ if("IntersectionObserver" in window){
  $$(".reveal").forEach(el=>io.observe(el));
 }else $$(".reveal").forEach(el=>el.classList.add("is-visible"));
 
-function utmData(){
- const q=new URLSearchParams(location.search), keys=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
- const data={}; keys.forEach(k=>{const v=q.get(k)||sessionStorage.getItem(`kreditor_${k}`);if(v){data[k]=v;sessionStorage.setItem(`kreditor_${k}`,v)}}); return data;
-}
 $$('a[href^="tel:"]').forEach(a=>a.addEventListener("click",()=>track("click_phone",{page:location.pathname})));
 $$('a[href*="wa.me"]').forEach(a=>a.addEventListener("click",()=>track("click_whatsapp",{page:location.pathname})));
 $$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_telegram",{page:location.pathname})));
