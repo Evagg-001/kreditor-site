@@ -8,16 +8,17 @@
     "tel:"
   ]);
 
-  function normalizeText(value, maxLength = 1000) {
-    if (typeof value !== "string") {
-      return "";
-    }
+function normalizeText(value, maxLength = 1000) {
+  if (typeof value !== "string") {
+    return "";
+  }
 
-    return value
-      .replace(/\u0000/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, maxLength);
+  return value
+    .split("\0")
+    .join("")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
   }
 
   function isSafeUrl(value, options = {}) {
