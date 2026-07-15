@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KREDITOR Modules Test</title>
+</head>
+<body>
+  <main>
+    <h1>KREDITOR Frontend Core Test</h1>
+    <p id="status">Ожидание запуска...</p>
+  </main>
+
+  <script src="assets/js/core/config.js"></script>
+  <script src="assets/js/core/events.js"></script>
+  <script src="assets/js/services/storage.js"></script>
+  <script src="assets/js/services/security.js"></script>
+  <script src="assets/js/modules/analytics.js"></script>
+  <script src="assets/js/core/bootstrap.js"></script>
+
+  <script>
+    document.addEventListener("kreditor:ready", function (event) {
+      const status = document.getElementById("status");
+
+      status.textContent =
+        "Модули успешно запущены. Версия: " +
+        event.detail.version;
+    });
+
+    document.addEventListener("kreditor:error", function () {
+      const status = document.getElementById("status");
+      status.textContent = "Ошибка запуска модулей.";
+    });
+  </script>
+</body>
