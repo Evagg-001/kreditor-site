@@ -214,10 +214,11 @@ function track(event,params={}){
   }catch(_){/* analytics must never block UX */}
 }
 
-const menu=$(".menu-toggle"), nav=$("#main-nav");
-menu?.addEventListener("click",()=>{const open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));});
-$$("#main-nav a").forEach(a=>a.addEventListener("click",()=>{nav?.classList.remove("open");menu?.setAttribute("aria-expanded","false")}));
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){nav?.classList.remove("open");menu?.setAttribute("aria-expanded","false");$("#lead-modal")?.close()}});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    $("#lead-modal")?.close();
+  }
+});
 
 const modal=$("#lead-modal");
 $$('[data-open-modal]').forEach(b=>b.addEventListener("click",()=>{modal?.showModal();track("open_lead_modal",{page:location.pathname})}));

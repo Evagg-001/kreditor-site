@@ -57,6 +57,9 @@
 
     try {
       assertDependency("KreditorConfig", window.KreditorConfig);
+      if (window.KreditorNavigation) {
+  window.KreditorNavigation.initialize();
+}
       initializeSecurity();
       initializeAnalytics();
       emitReadyEvent();
