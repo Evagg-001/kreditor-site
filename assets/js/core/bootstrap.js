@@ -59,6 +59,13 @@
       assertDependency("KreditorConfig", window.KreditorConfig);
       if (window.KreditorNavigation) {
   window.KreditorNavigation.initialize();
+  if (window.KreditorLeadModal) {
+    window.KreditorLeadModal.initialize();
+}
+
+if (window.KreditorReveal) {
+    window.KreditorReveal.initialize();
+}
 }
       initializeSecurity();
       initializeAnalytics();

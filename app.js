@@ -220,10 +220,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-const modal=$("#lead-modal");
-$$('[data-open-modal]').forEach(b=>b.addEventListener("click",()=>{modal?.showModal();track("open_lead_modal",{page:location.pathname})}));
-$("[data-close-modal]")?.addEventListener("click",()=>modal?.close());
-modal?.addEventListener("click",e=>{if(e.target===modal)modal.close()});
 
 if("IntersectionObserver" in window){
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");io.unobserve(e.target)}}),{threshold:.1});
