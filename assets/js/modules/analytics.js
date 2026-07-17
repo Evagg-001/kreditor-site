@@ -39,7 +39,7 @@ window.KREDITOR_ANALYTICS = {
       clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
-      webvisor: true
+      webvisor: window.location.hostname !== 'localhost'
     });
   }
 
