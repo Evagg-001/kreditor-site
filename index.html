@@ -340,5 +340,28 @@ window.addEventListener("load", () => {
 });
 </script>
 
+
+<script>
+window.KreditorIdleLoader = () => {
+  [
+    "assets/js/modules/analytics.js",
+    "assets/js/modules/utm.js",
+    "assets/js/modules/cookie-banner.js",
+    "assets/js/modules/contact-tracking.js",
+    "assets/js/modules/reveal.js",
+    "role-select.js"
+  ].forEach(src => {
+    const s = document.createElement("script");
+    s.src = src;
+    document.body.appendChild(s);
+  });
+};
+
+(window.requestIdleCallback || window.setTimeout)(
+  window.KreditorIdleLoader,
+  2000
+);
+</script>
+
 </body>
 </html>
