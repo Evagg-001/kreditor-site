@@ -59,17 +59,18 @@
       assertDependency("KreditorConfig", window.KreditorConfig);
       if (window.KreditorNavigation) {
   window.KreditorNavigation.initialize();
-  if (window.KreditorLeadModal) {
-    window.KreditorLeadModal.initialize();
+}
+
+if (window.KreditorLeadModal) {
+  window.KreditorLeadModal.initialize();
 }
 
 if (window.KreditorReveal) {
-    window.KreditorReveal.initialize();
+  window.KreditorReveal.initialize();
 }
 
 if (window.KreditorUTM) {
-    window.KreditorUTM.initialize();
-}
+  window.KreditorUTM.initialize();
 }
       if (window.KreditorCookieBanner) {
       window.KreditorCookieBanner.initialize();
