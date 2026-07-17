@@ -40,3 +40,43 @@ body.cookie-consent-pending .mobile-contact-bar {
 }
 
 @media(max-width:640px){.site-header .nav-wrap{height:64px;flex-wrap:nowrap;align-items:center;padding:0;gap:8px}.brand{flex:1 1 auto;min-width:0;margin-right:0}.language-switch{margin-left:auto;order:initial}.menu-toggle{margin-left:0;order:initial}.header-phone,.header-cta{display:none!important}}
+
+/* WhatsApp manual confirmation */
+.wa-ready {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid rgba(14,31,53,.16);
+  border-radius: 14px;
+  background: #f7f9fc;
+  text-align: center;
+}
+
+.wa-ready p {
+  margin: 0 0 14px;
+}
+
+.wa-ready__link,
+.wa-ready__cancel {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  padding: 10px 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wa-ready__link {
+  background: #25d366;
+  color: #071b10;
+  text-decoration: none;
+}
+
+.wa-ready__cancel {
+  border: 1px solid rgba(14,31,53,.2);
+  background: #fff;
+  color: #0e1f35;
+}

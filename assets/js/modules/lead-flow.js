@@ -69,6 +69,36 @@
     return block;
   };
 
+  const showWhatsAppLink=(form,url)=>{
+    form.querySelector(".wa-ready")?.remove();
+
+    const box=document.createElement("div");
+    box.className="wa-ready";
+
+    const textNode=document.createElement("p");
+    textNode.textContent="Сообщение подготовлено. Откройте WhatsApp вручную.";
+
+    const link=document.createElement("a");
+    link.href=url;
+    link.target="_blank";
+    link.rel="noopener noreferrer";
+    link.className="wa-ready__link";
+    link.textContent="Открыть WhatsApp";
+
+    const cancel=document.createElement("button");
+    cancel.type="button";
+    cancel.className="wa-ready__cancel";
+    cancel.textContent="Отмена";
+    cancel.addEventListener("click",()=>box.remove());
+
+    box.append(textNode,link,cancel);
+
+    const channelBlock=form.querySelector(".lead-channel-block");
+    (channelBlock||form).insertAdjacentElement("afterend",box);
+    link.focus({preventScroll:true});
+  };
+
+
   forms.forEach(form=>{
     const submit=form.querySelector('button[type="submit"]');
     if(!submit)return;
@@ -101,8 +131,9 @@
       if(!validate(form))return;
       const channel=btn.dataset.channel;const text=message(form);analytics("lead_channel_select",channel);
       if(channel==="whatsapp"){
-        const whatsappUrl=`https://api.whatsapp.com/send/?phone=${CONFIG.phoneDigits}&text=${encodeURIComponent(text)}&type=phone_number&app_absent=0`;
-        window.location.assign(whatsappUrl);
+        const whatsappUrl=`https://wa.me/${CONFIG.phoneDigits}?text=${encodeURIComponent(text)}`;
+        setStatus(form,"Сообщение подготовлено. Нажмите «Открыть WhatsApp».","success");
+        showWhatsAppLink(form,whatsappUrl);
         return;
       }else if(channel==="telegram"){
         const ok=await copy(text);
