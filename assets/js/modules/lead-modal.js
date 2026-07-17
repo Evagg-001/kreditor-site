@@ -53,3 +53,55 @@
     initialize
   });
 })(window, document);
+
+/* KREDITOR modal trigger fallback */
+(function (window, document) {
+  "use strict";
+
+  function bindModalTriggers() {
+    if (document.documentElement.dataset.kreditorModalTriggersBound === "1") {
+      return;
+    }
+
+    document.documentElement.dataset.kreditorModalTriggersBound = "1";
+
+    document.addEventListener("click", function (event) {
+      const openTrigger = event.target.closest(
+        "[data-open-modal], .js-open-lead"
+      );
+
+      if (openTrigger) {
+        const modal = document.querySelector("#lead-modal");
+
+        if (modal && typeof modal.showModal === "function") {
+          event.preventDefault();
+
+          if (!modal.open) {
+            modal.showModal();
+          }
+        }
+
+        return;
+      }
+
+      const closeTrigger = event.target.closest("[data-close-modal]");
+
+      if (closeTrigger) {
+        const modal = closeTrigger.closest("dialog");
+
+        if (modal && modal.open) {
+          event.preventDefault();
+          modal.close();
+        }
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindModalTriggers, {
+      once: true
+    });
+  } else {
+    bindModalTriggers();
+  }
+})(window, document);

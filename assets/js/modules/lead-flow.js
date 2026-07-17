@@ -102,7 +102,13 @@
       const channel=btn.dataset.channel;const text=message(form);analytics("lead_channel_select",channel);
       if(channel==="whatsapp"){
         setStatus(form,"Открываем WhatsApp с подготовленным сообщением…","success");
-        window.open(`https://wa.me/${CONFIG.phoneDigits}?text=${encodeURIComponent(text)}`,"_blank","noopener,noreferrer");
+        const whatsappUrl=`https://wa.me/${CONFIG.phoneDigits}?text=${encodeURIComponent(text)}`;
+        const whatsappWindow=window.open(whatsappUrl,"_blank");
+        if(whatsappWindow){
+          whatsappWindow.opener=null;
+        }else{
+          window.location.assign(whatsappUrl);
+        }
       }else if(channel==="telegram"){
         const ok=await copy(text);
         setStatus(form,ok?"Текст обращения скопирован. Открываем Telegram…":"Открываем Telegram. Текст можно скопировать из формы.","success");
