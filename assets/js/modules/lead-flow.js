@@ -101,14 +101,9 @@
       if(!validate(form))return;
       const channel=btn.dataset.channel;const text=message(form);analytics("lead_channel_select",channel);
       if(channel==="whatsapp"){
-        setStatus(form,"Открываем WhatsApp с подготовленным сообщением…","success");
-        const whatsappUrl=`https://wa.me/${CONFIG.phoneDigits}?text=${encodeURIComponent(text)}`;
-        const whatsappWindow=window.open(whatsappUrl,"_blank");
-        if(whatsappWindow){
-          whatsappWindow.opener=null;
-        }else{
-          window.location.assign(whatsappUrl);
-        }
+        const whatsappUrl=`https://api.whatsapp.com/send/?phone=${CONFIG.phoneDigits}&text=${encodeURIComponent(text)}&type=phone_number&app_absent=0`;
+        window.location.assign(whatsappUrl);
+        return;
       }else if(channel==="telegram"){
         const ok=await copy(text);
         setStatus(form,ok?"Текст обращения скопирован. Открываем Telegram…":"Открываем Telegram. Текст можно скопировать из формы.","success");

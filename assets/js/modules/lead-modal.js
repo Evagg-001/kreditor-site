@@ -1,107 +1,121 @@
 (function (window, document) {
   "use strict";
 
+  const OPEN_SELECTOR = [
+    "[data-open-modal]",
+    "[data-open-lead]",
+    ".js-open-lead",
+    ".header-cta",
+    ".desktop-sticky-main"
+  ].join(",");
+
+  const CLOSE_SELECTOR = [
+    "[data-close-modal]",
+    ".modal-close"
+  ].join(",");
+
   let initialized = false;
 
-  function initialize() {
-    if (initialized) {
+  function getModal() {
+    return document.querySelector("#lead-modal");
+  }
+
+  function open() {
+    const modal = getModal();
+
+    if (!modal) {
+      console.error("[KREDITOR LeadModal] #lead-modal не найден");
       return false;
     }
 
-    const modal = document.querySelector("#lead-modal");
+    if (modal.open) {
+      return true;
+    }
+
+    if (typeof modal.showModal === "function") {
+      modal.showModal();
+    } else {
+      modal.setAttribute("open", "");
+    }
+
+    return true;
+  }
+
+  function close() {
+    const modal = getModal();
 
     if (!modal) {
       return false;
     }
 
-    document.querySelectorAll("[data-open-modal]").forEach(function (button) {
-      button.addEventListener("click", function () {
-        modal.showModal();
+    if (typeof modal.close === "function" && modal.open) {
+      modal.close();
+    } else {
+      modal.removeAttribute("open");
+    }
 
-        if (window.KreditorAnalytics) {
-          window.KreditorAnalytics.track("open_lead_modal", {
-            path: window.location.pathname
-          });
-        }
-      });
-    });
-
-    document.querySelector("[data-close-modal]")?.addEventListener(
-      "click",
-      function () {
-        modal.close();
-      }
-    );
-
-    modal.addEventListener("click", function (event) {
-      if (event.target === modal) {
-        modal.close();
-      }
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && modal.open) {
-        modal.close();
-      }
-    });
-
-    initialized = true;
     return true;
   }
 
-  window.KreditorLeadModal = Object.freeze({
-    initialize
-  });
-})(window, document);
+  function handleClick(event) {
+    const target = event.target;
 
-/* KREDITOR modal trigger fallback */
-(function (window, document) {
-  "use strict";
-
-  function bindModalTriggers() {
-    if (document.documentElement.dataset.kreditorModalTriggersBound === "1") {
+    if (!(target instanceof Element)) {
       return;
     }
 
-    document.documentElement.dataset.kreditorModalTriggersBound = "1";
+    const closeTrigger = target.closest(CLOSE_SELECTOR);
 
-    document.addEventListener("click", function (event) {
-      const openTrigger = event.target.closest(
-        "[data-open-modal], .js-open-lead"
-      );
+    if (closeTrigger) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      close();
+      return;
+    }
 
-      if (openTrigger) {
-        const modal = document.querySelector("#lead-modal");
+    const openTrigger = target.closest(OPEN_SELECTOR);
 
-        if (modal && typeof modal.showModal === "function") {
-          event.preventDefault();
+    if (openTrigger) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      open();
+      return;
+    }
 
-          if (!modal.open) {
-            modal.showModal();
-          }
-        }
+    const modal = getModal();
 
-        return;
+    if (modal && target === modal) {
+      const rect = modal.getBoundingClientRect();
+      const inside =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if (!inside) {
+        close();
       }
-
-      const closeTrigger = event.target.closest("[data-close-modal]");
-
-      if (closeTrigger) {
-        const modal = closeTrigger.closest("dialog");
-
-        if (modal && modal.open) {
-          event.preventDefault();
-          modal.close();
-        }
-      }
-    });
+    }
   }
 
+  function initialize() {
+    if (initialized) {
+      return;
+    }
+
+    initialized = true;
+    document.addEventListener("click", handleClick, true);
+  }
+
+  window.KreditorLeadModal = Object.freeze({
+    initialize,
+    open,
+    close
+  });
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindModalTriggers, {
-      once: true
-    });
+    document.addEventListener("DOMContentLoaded", initialize, { once: true });
   } else {
-    bindModalTriggers();
+    initialize();
   }
 })(window, document);
