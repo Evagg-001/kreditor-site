@@ -79,6 +79,10 @@ if (window.KreditorUTM) {
       window.KreditorContactTracking.initialize();
     }
 
+    if (window.KreditorLeadFlow) {
+        window.KreditorLeadFlow.initialize();
+    }
+
     initializeSecurity();
       initializeAnalytics();
       emitReadyEvent();
