@@ -131,7 +131,7 @@
       if(!validate(form))return;
       const channel=btn.dataset.channel;const text=message(form);analytics("lead_channel_select",channel);
       if(channel==="whatsapp"){
-        const whatsappUrl=`https://wa.me/${CONFIG.phoneDigits}?text=${encodeURIComponent(text)}`;
+        const whatsappUrl=`https://web.whatsapp.com/send?phone=${CONFIG.phoneDigits}&text=${encodeURIComponent(text)}`;
         setStatus(form,"Сообщение подготовлено. Нажмите «Открыть WhatsApp».","success");
         showWhatsAppLink(form,whatsappUrl);
         return;
@@ -150,22 +150,61 @@
 
   document.querySelectorAll(".desktop-sticky-cta").forEach(widget=>{
     const main=widget.querySelector(".desktop-sticky-main");
-    if(main){main.textContent="Обсудить ситуацию";main.classList.add("js-open-lead");main.setAttribute("data-open-modal","")}
-    widget.querySelectorAll("a").forEach(a=>a.remove());
-    const channels=[
-      ["phone",`tel:${CONFIG.phone}`,"☎","Позвонить"],
-      ["whatsapp",`https://wa.me/${CONFIG.phoneDigits}`,"W","WhatsApp"],
-      ["telegram",`https://t.me/${CONFIG.telegram}`,"T","Telegram"],
-      ["email",`mailto:${CONFIG.email}?subject=${encodeURIComponent("Обращение с сайта КРЕДИТОР")}`,"✉","Email"]
-    ];
-    channels.forEach(([channel,href,label,aria])=>{
-      const a=document.createElement("a");a.className="kreditor-sticky-channel";a.dataset.contactChannel=channel;a.href=href;a.textContent=label;a.setAttribute("aria-label",aria);
-      if(channel==="whatsapp"||channel==="telegram"){a.target="_blank";a.rel="noopener"}
-      a.addEventListener("click",()=>analytics("sticky_contact_click",channel));widget.append(a);
-    });
-    if(main&&!main.dataset.v12Bound){
-      main.dataset.v12Bound="1";
-      main.addEventListener("click",()=>{document.querySelector("#lead-modal")?.showModal();analytics("sticky_open_form")});
+
+    const openLeadModal=()=>{
+      if(window.KreditorLeadModal?.open){
+        window.KreditorLeadModal.open();
+      }else{
+        const modal=document.querySelector("#lead-modal");
+        if(modal&&!modal.open&&typeof modal.showModal==="function"){
+          modal.showModal();
+        }
+      }
+      analytics("sticky_open_form");
+    };
+
+    if(main){
+      main.textContent="Обсудить ситуацию";
+      main.classList.add("js-open-lead");
+      main.setAttribute("data-open-modal","");
     }
+
+    widget.querySelectorAll("a,.kreditor-sticky-channel").forEach(node=>node.remove());
+
+    const phone=document.createElement("a");
+    phone.className="kreditor-sticky-channel";
+    phone.href=`tel:${CONFIG.phone}`;
+    phone.textContent="☎";
+    phone.setAttribute("aria-label","Позвонить");
+    phone.addEventListener("click",()=>analytics("sticky_contact_click","phone"));
+
+    const whatsapp=document.createElement("button");
+    whatsapp.type="button";
+    whatsapp.className="kreditor-sticky-channel";
+    whatsapp.textContent="W";
+    whatsapp.setAttribute("aria-label","Открыть форму для WhatsApp");
+    whatsapp.addEventListener("click",event=>{
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      openLeadModal();
+    });
+
+    const telegram=document.createElement("a");
+    telegram.className="kreditor-sticky-channel";
+    telegram.href=`https://t.me/${CONFIG.telegram}`;
+    telegram.target="_blank";
+    telegram.rel="noopener noreferrer";
+    telegram.textContent="T";
+    telegram.setAttribute("aria-label","Написать в Telegram");
+    telegram.addEventListener("click",()=>analytics("sticky_contact_click","telegram"));
+
+    const email=document.createElement("a");
+    email.className="kreditor-sticky-channel";
+    email.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Обращение с сайта КРЕДИТОР")}`;
+    email.textContent="✉";
+    email.setAttribute("aria-label","Написать по электронной почте");
+    email.addEventListener("click",()=>analytics("sticky_contact_click","email"));
+
+    widget.append(phone,whatsapp,telegram,email);
   });
 })();
