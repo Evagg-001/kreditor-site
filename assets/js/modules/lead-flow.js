@@ -1,7 +1,16 @@
 /* contact-channels.js */
 "use strict";
 (()=>{
-  const CONFIG={phone:"+79777379737",phoneDigits:"79777379737",telegram:"ooo_kreditor",email:"kreditoro@bk.ru"};
+  const CONFIG={
+    phone: window.KreditorConfig?.contacts?.phone || "+79777379737",
+    phoneDigits: String(
+      window.KreditorConfig?.contacts?.phoneDigits ||
+      window.KreditorConfig?.contacts?.phone ||
+      "79777379737"
+    ).replace(/\D/g, ""),
+    telegram: window.KreditorConfig?.contacts?.telegram || "ooo_kreditor",
+    email: window.KreditorConfig?.contacts?.email || "kreditoro@bk.ru"
+  };
   const forms=[...document.querySelectorAll('[data-lead-form]')];
 
   const normalizePhone=v=>String(v||"").replace(/[^\d+]/g,"");
