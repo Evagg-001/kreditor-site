@@ -80,3 +80,70 @@ body.cookie-consent-pending .mobile-contact-bar {
   background: #fff;
   color: #0e1f35;
 }
+
+/* WhatsApp confirmation */
+.wa-ready {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid rgba(14, 31, 53, 0.16);
+  border-radius: 14px;
+  background: #f7f9fc;
+  text-align: center;
+}
+
+.wa-ready__title {
+  display: block;
+  margin-bottom: 8px;
+  color: #0e1f35;
+  font-size: 18px;
+}
+
+.wa-ready p {
+  margin: 0;
+  color: #526071;
+  line-height: 1.5;
+}
+
+.wa-ready__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.wa-ready__link,
+.wa-ready__cancel {
+  flex: 1;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wa-ready__link {
+  display: inline-flex;
+  border: 1px solid #1eaa59;
+  background: #25d366;
+  color: #071b10;
+  text-decoration: none;
+}
+
+.wa-ready__cancel {
+  border: 1px solid rgba(14, 31, 53, 0.2);
+  background: #ffffff;
+  color: #0e1f35;
+}
+
+.desktop-sticky-cta button.kreditor-sticky-channel {
+  appearance: none;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .wa-ready__actions {
+    flex-direction: column;
+  }
+}

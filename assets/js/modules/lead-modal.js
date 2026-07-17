@@ -58,44 +58,31 @@
   }
 
   function handleClick(event) {
-    const target = event.target;
-
-    if (!(target instanceof Element)) {
+    if (!(event.target instanceof Element)) {
       return;
     }
 
-    const closeTrigger = target.closest(CLOSE_SELECTOR);
+    const closeButton = event.target.closest(CLOSE_SELECTOR);
 
-    if (closeTrigger) {
+    if (closeButton) {
       event.preventDefault();
       event.stopImmediatePropagation();
       close();
       return;
     }
 
-    const openTrigger = target.closest(OPEN_SELECTOR);
+    const openButton = event.target.closest(OPEN_SELECTOR);
 
-    if (openTrigger) {
+    if (openButton) {
       event.preventDefault();
       event.stopImmediatePropagation();
       open();
-      return;
     }
+  }
 
-    const modal = getModal();
-
-    if (modal && target === modal) {
-      const rect = modal.getBoundingClientRect();
-      const inside =
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom;
-
-      if (!inside) {
-        close();
-      }
-    }
+  function handleCancel(event) {
+    event.preventDefault();
+    close();
   }
 
   function initialize() {
@@ -104,7 +91,14 @@
     }
 
     initialized = true;
+
     document.addEventListener("click", handleClick, true);
+
+    const modal = getModal();
+
+    if (modal) {
+      modal.addEventListener("cancel", handleCancel);
+    }
   }
 
   window.KreditorLeadModal = Object.freeze({
