@@ -294,8 +294,6 @@
 <script defer src="assets/js/modules/navigation.js"></script>
 <script defer src="assets/js/modules/lead-modal.js"></script>
 <script defer src="assets/js/modules/lead-flow.js"></script>
-<script defer src="assets/js/services/security.js"></script>
-
 <script>
 window.addEventListener("load", function () {
     [
@@ -312,9 +310,7 @@ window.addEventListener("load", function () {
     });
 });
 </script>
-<script defer src="assets/js/core/bootstrap.js"></script><script defer="" src="role-select.js"></script>
-
-<div aria-label="Настройки файлов cookie" class="cookie-banner" id="cookie-banner" role="dialog"><p>Сайт использует обязательные файлы cookie и, с вашего согласия, Яндекс.Метрику. Подробнее — в <a href="legal/cookies.html"><u>политике Cookie</u></a>.</p><div class="cookie-actions"><button class="btn btn-primary" id="cookie-accept" type="button">Разрешить аналитику</button><button class="btn btn-ghost" id="cookie-reject" type="button">Только обязательные</button></div></div><nav aria-label="Быстрые способы связи" class="mobile-contact-bar">
+<script defer src="assets/js/core/bootstrap.js"></script><div aria-label="Настройки файлов cookie" class="cookie-banner" id="cookie-banner" role="dialog"><p>Сайт использует обязательные файлы cookie и, с вашего согласия, Яндекс.Метрику. Подробнее — в <a href="legal/cookies.html"><u>политике Cookie</u></a>.</p><div class="cookie-actions"><button class="btn btn-primary" id="cookie-accept" type="button">Разрешить аналитику</button><button class="btn btn-ghost" id="cookie-reject" type="button">Только обязательные</button></div></div><nav aria-label="Быстрые способы связи" class="mobile-contact-bar">
 <a data-contact-channel="phone" href="tel:+79777379737"><span>☎</span><small>Позвонить</small></a>
 <a data-contact-channel="whatsapp" href="https://wa.me/79777379737" rel="noopener noreferrer" target="_blank"><span>W</span><small>WhatsApp</small></a>
 <a data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank"><span>T</span><small>Telegram</small></a>
@@ -324,5 +320,25 @@ window.addEventListener("load", function () {
           </button>
 <a aria-label="Позвонить" data-contact-channel="phone" href="tel:+79777379737">☎</a>
 <a aria-label="Написать в Telegram" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank">T</a>
-</aside></body>
+</aside>
+<script>
+window.addEventListener("load", () => {
+  [
+    "assets/js/modules/analytics.js",
+    "assets/js/modules/utm.js",
+    "assets/js/modules/cookie-banner.js",
+    "assets/js/modules/contact-tracking.js",
+    "assets/js/services/security.js",
+    "assets/js/modules/reveal.js",
+    "role-select.js"
+  ].forEach(src => {
+    const s = document.createElement("script");
+    s.src = src;
+    s.defer = true;
+    document.body.appendChild(s);
+  });
+});
+</script>
+
+</body>
 </html>
