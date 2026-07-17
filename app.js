@@ -172,32 +172,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-if("IntersectionObserver" in window){
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");io.unobserve(e.target)}}),{threshold:.1});
- $$(".reveal").forEach(el=>io.observe(el));
-}else $$(".reveal").forEach(el=>el.classList.add("is-visible"));
-
-$$('a[href^="tel:"]').forEach(a=>a.addEventListener("click",()=>track("click_phone",{page:location.pathname})));
-$$('a[href*="wa.me"]').forEach(a=>a.addEventListener("click",()=>track("click_whatsapp",{page:location.pathname})));
-$$('a[href*="t.me"]').forEach(a=>a.addEventListener("click",()=>track("click_telegram",{page:location.pathname})));
-$$('a[href^="mailto:"]').forEach(a=>a.addEventListener("click",()=>track("click_email",{page:location.pathname})));
-
-$$("[data-contact-channel]").forEach(link=>{
-  link.addEventListener("click",()=>{
-    track("modal_contact_click",{
-      page:location.pathname,
-      channel:link.dataset.contactChannel||"unknown"
-    });
-  });
-});
-
-document.querySelectorAll(".mobile-contact-bar [data-contact-channel]").forEach(link=>{
-  link.addEventListener("click",()=>{
-    if(typeof track==="function") track("mobile_contact_click",{
-      page:location.pathname,channel:link.dataset.contactChannel||"unknown"
-    });
-  });
-});
 
 // KREDITOR V10: conversion analytics and friction diagnostics
 document.querySelectorAll('form[data-conversion-form="lead"]').forEach(form=>{

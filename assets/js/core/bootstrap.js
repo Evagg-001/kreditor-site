@@ -75,6 +75,10 @@ if (window.KreditorUTM) {
       window.KreditorCookieBanner.initialize();
     }
 
+    if (window.KreditorContactTracking) {
+      window.KreditorContactTracking.initialize();
+    }
+
     initializeSecurity();
       initializeAnalytics();
       emitReadyEvent();
