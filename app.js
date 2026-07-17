@@ -252,3 +252,22 @@ document.querySelectorAll("[data-analytics]").forEach(el=>{
 
   window.KreditorUXPolish = { enhance };
 })();
+
+/* KREDITOR reveal fail-safe */
+(function () {
+  "use strict";
+
+  function revealAll() {
+    document.querySelectorAll(".reveal").forEach(function (element) {
+      element.classList.add("is-visible");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", revealAll, { once: true });
+  } else {
+    revealAll();
+  }
+
+  window.setTimeout(revealAll, 300);
+})();
