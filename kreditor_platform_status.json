@@ -1,0 +1,9 @@
+{
+    "module": "KREDITOR PLATFORM CORE",
+    "created": [
+        "api",
+        "crm",
+        "logs"
+    ],
+    "status": "initialized"
+}
