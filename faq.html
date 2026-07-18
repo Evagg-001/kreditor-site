@@ -71,3 +71,25 @@
 <a aria-label="Позвонить" data-contact-channel="phone" href="tel:+79777379737">☎</a>
 <a aria-label="Написать в Telegram" data-contact-channel="telegram" href="https://t.me/ooo_kreditor" rel="noopener noreferrer" target="_blank">T</a>
 </aside></body></html>
+
+<script>
+
+async function sendLead(data){
+
+const response = await fetch(
+"http://127.0.0.1:8000/api/leads",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+}
+);
+
+return await response.json();
+
+}
+
+</script>
+
