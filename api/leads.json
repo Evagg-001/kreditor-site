@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "id": "f8ae9f14-d79b-4e11-a5da-53d55314691a",
+        "created": "2026-07-18 13:22:32.482506",
+        "name": "Тестовый клиент",
+        "phone": "+79990000000",
+        "email": "test@example.com",
+        "role": "Бизнес",
+        "problem": "Проверка CRM ядра",
+        "status": "NEW"
+    },
+    {
+        "id": "e910bfca-8936-4b04-95af-322cf3f03c6f",
+        "created": "2026-07-18 13:23:33.652500",
+        "name": "Тестовый клиент",
+        "phone": "+79990000000",
+        "email": "test@example.com",
+        "role": "Бизнес",
+        "problem": "Проверка CRM ядра",
+        "status": "NEW"
+    }
+]

@@ -1,6 +1,34 @@
 {
-    "clients": [],
-    "cases": [],
+    "clients": [
+        {
+            "id": "f8ae9f14-d79b-4e11-a5da-53d55314691a",
+            "name": "Тестовый клиент",
+            "phone": "+79990000000",
+            "role": "Бизнес"
+        },
+        {
+            "id": "e910bfca-8936-4b04-95af-322cf3f03c6f",
+            "name": "Тестовый клиент",
+            "phone": "+79990000000",
+            "role": "Бизнес"
+        }
+    ],
+    "cases": [
+        {
+            "id": "f8ae9f14-d79b-4e11-a5da-53d55314691a",
+            "client_id": "f8ae9f14-d79b-4e11-a5da-53d55314691a",
+            "category": "Бизнес",
+            "status": "NEW",
+            "description": "Проверка CRM ядра"
+        },
+        {
+            "id": "e910bfca-8936-4b04-95af-322cf3f03c6f",
+            "client_id": "e910bfca-8936-4b04-95af-322cf3f03c6f",
+            "category": "Бизнес",
+            "status": "NEW",
+            "description": "Проверка CRM ядра"
+        }
+    ],
     "documents": [],
     "tasks": []
 }
